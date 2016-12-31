@@ -13,9 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        readCredsList()
         return true
     }
 
@@ -41,6 +41,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func readCredsList() {
+        var propListFormat = PropertyListSerialization.PropertyListFormat.xml
+        var plistData: [String: AnyObject] = [:]
+        let plistPath: String? = Bundle.main.path(forResource: "Creds", ofType: "plist")!
+        let plistXML = FileManager.default.contents(atPath: plistPath!)!
+        do {
+            plistData = try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propListFormat) as! [String:AnyObject]
+        } catch {
+            print("Error reading Creds.plist")
+        }
+        
+        for (key, value) in plistData {
+            print("key:", key)
+            print("value:", value)
+        }
+    }
 }
 
