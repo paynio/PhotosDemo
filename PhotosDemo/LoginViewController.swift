@@ -37,7 +37,16 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        webView?.loadUrl(string: "http://apple.com")
+        let fetcher = InstagramFetcher()
+        
+        guard let clientID = fetcher.clientID else {
+            print("FAILED TO GET CLIENT ID")
+            return
+        }
+        
+        let urlString = "https://api.instagram.com/oauth/authorize/?client_id=\(clientID)&redirect_uri=REDIRECT-URI&response_type=token"
+        
+        webView?.loadUrl(string: urlString)
     }
     
     override func didReceiveMemoryWarning() {

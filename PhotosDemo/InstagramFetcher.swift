@@ -11,7 +11,7 @@ import Alamofire
 
 class InstagramFetcher {
     
-    private let clientID = { () -> String? in
+    let clientID = { () -> String? in
         var propListFormat = PropertyListSerialization.PropertyListFormat.xml
         var plistData: [String: AnyObject] = [:]
         let plistPath: String? = Bundle.main.path(forResource: "Creds", ofType: "plist")!
@@ -31,6 +31,7 @@ class InstagramFetcher {
         return plistData["InstagramClientID"] as? String
     }()
     
+    /*
     func fetchJSON() {
         print("fetchJSON")
     }
@@ -42,11 +43,11 @@ class InstagramFetcher {
             return
         }
 
-        let urlString = "https://api.instagram.com/oauth/authorize/?client_id=" + self.clientID! + "&redirect_uri=REDIRECT-URI&response_type=token"
+        let urlString = "https://api.instagram.com/oauth/authorize/?client_id=\(self.clientID)&redirect_uri=REDIRECT-URI&response_type=token"
         Alamofire.request(urlString).response { response in
             print(response)
         }
-        
     }
+    */
     
 }
