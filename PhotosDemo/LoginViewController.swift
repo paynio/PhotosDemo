@@ -17,7 +17,7 @@ extension WKWebView {
     }
 }
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, WKNavigationDelegate {
 
     // @IBOutlet weak var webView: UIWebView!
     
@@ -28,9 +28,8 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        
-        
         webView = WKWebView(frame:view.bounds)
+        webView?.navigationDelegate = self
         view.addSubview(webView!)
     }
 
@@ -44,9 +43,33 @@ class LoginViewController: UIViewController {
             return
         }
         
-        let urlString = "https://api.instagram.com/oauth/authorize/?client_id=\(clientID)&redirect_uri=REDIRECT-URI&response_type=token"
+        let redirectURI = "https://github.com/paynio/PhotosDemo"
+        let urlString = "https://api.instagram.com/oauth/authorize/?client_id=\(clientID)&redirect_uri=\(redirectURI)&response_type=token"
         
         webView?.loadUrl(string: urlString)
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        print("HIYA!")
+        print(navigationAction.request.url!.host!)
+
+        guard (navigationAction.request.url?.host) != nil else {
+            decisionHandler(.allow)
+            return
+        }
+        
+        // Registered my github URL as redirect uri on instagram.
+        // Implied auth requires stripping of access token from such redirect uri
+        
+        if navigationAction.request.url!.host! == "github.com" {
+            decisionHandler(.cancel)
+            
+            // GET access token
+        }
+        else {
+            decisionHandler(.allow)
+        }
     }
     
     override func didReceiveMemoryWarning() {
