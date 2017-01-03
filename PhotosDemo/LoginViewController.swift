@@ -17,12 +17,39 @@ extension WKWebView {
     }
 }
 
+
+extension URL {
+    func getQueryItemValueForKey(key: String) -> String? {
+        guard let components = NSURLComponents(url: self, resolvingAgainstBaseURL: false) else {
+            return nil
+        }
+        
+        guard let queryItems = components.queryItems else { return nil }
+        return queryItems.filter {
+            $0.name == key
+            }.first?.value
+    }
+}
+
+extension URL {
+    var queryItems: [String: String]? {
+        var params = [String: String]()
+        return NSURLComponents(url: self as URL, resolvingAgainstBaseURL: false)?
+            .queryItems?
+            .reduce([:], { (_, item) -> [String: String] in
+                params[item.name] = item.value
+                return params
+            })
+    }
+}
+
 class LoginViewController: UIViewController, WKNavigationDelegate {
 
     // @IBOutlet weak var webView: UIWebView!
     
     private var webView: WKWebView?
-    
+    let redirectURI = "https://github.com/paynio/PhotosDemo"
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,7 +70,6 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
             return
         }
         
-        let redirectURI = "https://github.com/paynio/PhotosDemo"
         let urlString = "https://api.instagram.com/oauth/authorize/?client_id=\(clientID)&redirect_uri=\(redirectURI)&response_type=token"
         
         webView?.loadUrl(string: urlString)
@@ -51,25 +77,28 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
-        print("HIYA!")
         print(navigationAction.request.url!.host!)
 
-        guard (navigationAction.request.url?.host) != nil else {
-            decisionHandler(.allow)
-            return
-        }
         
-        // Registered my github URL as redirect uri on instagram.
-        // Implied auth requires stripping of access token from such redirect uri
-        
-        if navigationAction.request.url!.host! == "github.com" {
-            decisionHandler(.cancel)
+        if navigationAction.request.url?.host == "github.com" {
+            print("HIYA!")
+            // print(navigationAction.request.url!.absoluteString)
             
-            // GET access token
+            /*
+            if let queryString = navigationAction.request.url?.queryItems {
+                print(queryString)
+                for (_, item) in queryString.enumerated() {
+                    print(item.key)
+                    print(item.value)
+                }
+            }
+             */
+            //print(navigationAction.request.url!.getQueryItemValueForKey(key: "access_token"))
+            decisionHandler(.cancel)
+
         }
-        else {
-            decisionHandler(.allow)
-        }
+        
+        decisionHandler(.allow)
     }
     
     override func didReceiveMemoryWarning() {
