@@ -20,6 +20,7 @@ extension WKWebView {
 class LoginViewController: UIViewController, WKNavigationDelegate {
     
     private var webView: WKWebView?
+    
     // redirectURI to match that configured on Instagram portal
     let redirectURI = "https://github.com/paynio/PhotosDemo"
 
@@ -44,7 +45,7 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
         }
         
         let urlString = "https://api.instagram.com/oauth/authorize/?client_id=\(clientID)&redirect_uri=\(redirectURI)&response_type=token"
-        
+
         webView?.loadUrl(string: urlString)
     }
     
