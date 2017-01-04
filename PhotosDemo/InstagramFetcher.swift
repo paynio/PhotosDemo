@@ -35,7 +35,7 @@ class InstagramFetcher {
         return UserDefaults.standard.value(forKey: "instagramAccessToken") as? String
     }()
     
-    func fetchSelfRecentImages(count:Int = 10) {
+    func fetchSelfRecentImages(count:Int = 10, completionHandler:@escaping ([InstaImage]?) -> ()) {
         
         guard let token = self.accessToken else {
             return
@@ -47,11 +47,13 @@ class InstagramFetcher {
             
             guard response.result.error == nil else {
                 print(response.result.error!)
+                completionHandler(nil)
                 return
             }
             
             guard let json = response.result.value as? [String: Any],
             let data = json["data"] as? [[String:Any]] else {
+                completionHandler(nil)
                 return
             }
             
@@ -63,10 +65,7 @@ class InstagramFetcher {
                 }
             }
             
-            for image in images {
-                print(image)
-                print("\n")
-            }
+            completionHandler(images)
         }
     }
 }
