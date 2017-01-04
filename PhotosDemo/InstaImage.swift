@@ -8,13 +8,22 @@
 
 import Foundation
 
-struct InstaImage {
+struct InstaImage: CustomStringConvertible {
     
     var thumbnailURLString: String?
     var standardResolutionURLString: String?
     var standardResolutionHeight: Int?
     var standardResolutionWidth: Int?
     var instagramID: String?
+    
+    var description: String {
+        if let thumb = thumbnailURLString, let idStr = instagramID, let height = standardResolutionHeight {
+            return "ID: \(idStr)\nThumbnail: \(thumb)\nStandard Height: \(height)"
+        }
+        else {
+            return "CHECK: Missing Key Parameters"
+        }
+    }
 }
 
 extension InstaImage {

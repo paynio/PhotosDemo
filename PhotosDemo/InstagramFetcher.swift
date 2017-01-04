@@ -55,8 +55,17 @@ class InstagramFetcher {
                 return
             }
             
+            var images:[InstaImage] = []
+            
             for item in data {
-                print(item)
+                if let instaImage = InstaImage(json: item) {
+                    images.append(instaImage)
+                }
+            }
+            
+            for image in images {
+                print(image)
+                print("\n")
             }
         }
     }
