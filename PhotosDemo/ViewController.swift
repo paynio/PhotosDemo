@@ -14,12 +14,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Check for existence of access token. If not present, fetch it
+        
+        guard (UserDefaults.standard.value(forKey: "instagramAccessToken") != nil) else {
+            self.performSegue(withIdentifier: "loginIdentifier", sender: self)
+            return
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
