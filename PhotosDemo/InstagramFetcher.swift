@@ -44,7 +44,20 @@ class InstagramFetcher {
         let urlString = "https://api.instagram.com/v1/users/self/media/recent/?access_token=\(token)&count=\(count)"
 
         Alamofire.request(urlString).responseJSON { response in
-            print(response)
+            
+            guard response.result.error == nil else {
+                print(response.result.error!)
+                return
+            }
+            
+            guard let json = response.result.value as? [String: Any],
+            let data = json["data"] as? [[String:Any]] else {
+                return
+            }
+            
+            for item in data {
+                print(item)
+            }
         }
     }
 }
