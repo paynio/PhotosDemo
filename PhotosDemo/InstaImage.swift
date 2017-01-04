@@ -14,16 +14,21 @@ struct InstaImage {
     var standardResolutionURLString: String?
     var standardResolutionHeight: Int?
     var standardResolutionWidth: Int?
+    var instagramID: String?
 }
 
 extension InstaImage {
-    init?(imagesJson: [String: Any]) {
-        guard let thumb = imagesJson["thumbnail"] as? [String:Any],
+    init?(json: [String: Any]) {
+        
+        guard let imagesJson = json["images"] as? [String:Any],
+            let thumb = imagesJson["thumbnail"] as? [String:Any],
             let thumbURL = thumb["url"] as? String,
             let standard = imagesJson["standard_resolution"] as? [String:Any],
             let standardURL = standard["url"] as? String,
             let standardHeight = standard["height"] as? Int,
-            let standardWidth = standard["width"] as? Int
+            let standardWidth = standard["width"] as? Int,
+            let instaID = json["id"] as? String
+            
             else {
                 return nil
         }
@@ -32,5 +37,6 @@ extension InstaImage {
         self.standardResolutionURLString = standardURL
         self.standardResolutionHeight = standardHeight
         self.standardResolutionWidth = standardWidth
+        self.instagramID = instaID
     }
 }
