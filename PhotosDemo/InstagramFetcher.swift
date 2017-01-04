@@ -38,6 +38,7 @@ class InstagramFetcher {
     func fetchSelfRecentImages(count:Int = 10, completionHandler:@escaping ([InstaImage]?) -> ()) {
         
         guard let token = self.accessToken else {
+            completionHandler(nil)
             return
         }
         
