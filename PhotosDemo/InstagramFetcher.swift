@@ -35,7 +35,7 @@ class InstagramFetcher {
         return UserDefaults.standard.value(forKey: "instagramAccessToken") as? String
     }()
     
-    func fetchSelfRecentImages(count:Int = 10) {
+    func fetchSelfRecentImages(count:Int = 10, completionHandler:@escaping ([InstaImage]?) -> ()) {
         
         guard let token = self.accessToken else {
             return
@@ -44,7 +44,28 @@ class InstagramFetcher {
         let urlString = "https://api.instagram.com/v1/users/self/media/recent/?access_token=\(token)&count=\(count)"
 
         Alamofire.request(urlString).responseJSON { response in
-            print(response)
+            
+            guard response.result.error == nil else {
+                print(response.result.error!)
+                completionHandler(nil)
+                return
+            }
+            
+            guard let json = response.result.value as? [String: Any],
+            let data = json["data"] as? [[String:Any]] else {
+                completionHandler(nil)
+                return
+            }
+            
+            var images:[InstaImage] = []
+            
+            for item in data {
+                if let instaImage = InstaImage(json: item) {
+                    images.append(instaImage)
+                }
+            }
+            
+            completionHandler(images)
         }
     }
 }

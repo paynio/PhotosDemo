@@ -21,6 +21,8 @@
 		376797841E1276CA00012899 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 376797821E1276CA00012899 /* LaunchScreen.storyboard */; };
 		3767978F1E1276CA00012899 /* PhotosDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767978E1E1276CA00012899 /* PhotosDemoTests.swift */; };
 		3767979A1E1276CA00012899 /* PhotosDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376797991E1276CA00012899 /* PhotosDemoUITests.swift */; };
+		379D53AB1E1D365B0082FBD1 /* InstaImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AF42411E1D24E10099454E /* InstaImage.swift */; };
+		379D53AC1E1D365C0082FBD1 /* InstaImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AF42411E1D24E10099454E /* InstaImage.swift */; };
 		37AF42421E1D24E10099454E /* InstaImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AF42411E1D24E10099454E /* InstaImage.swift */; };
 		4543E58617E3AFACCF06EC5B /* Pods_PhotosDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15731ECF1FC8DD9B01C59F22 /* Pods_PhotosDemo.framework */; };
 		85CCD8E734B54DA6F9BC2AFD /* Pods_PhotosDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD593D33B5B7F07E1C36F689 /* Pods_PhotosDemoUITests.framework */; };
@@ -480,6 +482,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				379D53AB1E1D365B0082FBD1 /* InstaImage.swift in Sources */,
 				375CB60B1E17FC3B00BB5221 /* InstagramFetcher.swift in Sources */,
 				3767978F1E1276CA00012899 /* PhotosDemoTests.swift in Sources */,
 			);
@@ -489,6 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				379D53AC1E1D365C0082FBD1 /* InstaImage.swift in Sources */,
 				375CB60C1E17FC3B00BB5221 /* InstagramFetcher.swift in Sources */,
 				3767979A1E1276CA00012899 /* PhotosDemoUITests.swift in Sources */,
 			);
