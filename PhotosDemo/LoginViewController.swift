@@ -17,37 +17,10 @@ extension WKWebView {
     }
 }
 
-
-extension URL {
-    func getQueryItemValueForKey(key: String) -> String? {
-        guard let components = NSURLComponents(url: self, resolvingAgainstBaseURL: false) else {
-            return nil
-        }
-        
-        guard let queryItems = components.queryItems else { return nil }
-        return queryItems.filter {
-            $0.name == key
-            }.first?.value
-    }
-}
-
-extension URL {
-    var queryItems: [String: String]? {
-        var params = [String: String]()
-        return NSURLComponents(url: self as URL, resolvingAgainstBaseURL: false)?
-            .queryItems?
-            .reduce([:], { (_, item) -> [String: String] in
-                params[item.name] = item.value
-                return params
-            })
-    }
-}
-
 class LoginViewController: UIViewController, WKNavigationDelegate {
-
-    // @IBOutlet weak var webView: UIWebView!
     
     private var webView: WKWebView?
+    // redirectURI to match that configured on Instagram portal
     let redirectURI = "https://github.com/paynio/PhotosDemo"
 
     override func viewDidLoad() {
@@ -76,26 +49,24 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        print(navigationAction.request.url!.host!)
 
+        guard let url = navigationAction.request.url else {
+            decisionHandler(.allow)
+            return
+        }
         
-        if navigationAction.request.url?.host == "github.com" {
+        if url.host == "github.com" {
+            print(navigationAction.request.url!)
             print("HIYA!")
-            // print(navigationAction.request.url!.absoluteString)
             
-            /*
-            if let queryString = navigationAction.request.url?.queryItems {
-                print(queryString)
-                for (_, item) in queryString.enumerated() {
-                    print(item.key)
-                    print(item.value)
-                }
+            if let urlFragment = url.fragment {
+                let accessToken = urlFragment.replacingOccurrences(of: "access_token=", with: "")
+                UserDefaults.standard.setValue(accessToken, forKey: "instagramAccessToken")
+                
+                print(accessToken)
+                self.dismiss(animated: true)
             }
-             */
-            //print(navigationAction.request.url!.getQueryItemValueForKey(key: "access_token"))
             decisionHandler(.cancel)
-
         }
         
         decisionHandler(.allow)
