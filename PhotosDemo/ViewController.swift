@@ -24,6 +24,9 @@ class ViewController: UIViewController {
             self.performSegue(withIdentifier: "loginIdentifier", sender: self)
             return
         }
+        
+        let fetcher = InstagramFetcher()
+        fetcher.fetchRecent()
     }
 
     override func didReceiveMemoryWarning() {

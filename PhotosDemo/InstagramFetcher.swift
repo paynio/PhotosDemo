@@ -31,6 +31,23 @@ class InstagramFetcher {
         return plistData["InstagramClientID"] as? String
     }()
     
+    let accessToken = { () -> String? in
+        return UserDefaults.standard.value(forKey: "instagramAccessToken") as? String
+    }()
+    
+    func fetchRecent() {
+        
+        guard let token = self.accessToken else {
+            return
+        }
+        
+        
+        let urlString = "https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=\(token)"
+        Alamofire.request(urlString).responseJSON { response in
+            print(response)
+        }
+    }
+    
     /*
     func fetchJSON() {
         print("fetchJSON")
