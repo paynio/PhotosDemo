@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         }
         
         let fetcher = InstagramFetcher()
-        fetcher.fetchRecent()
+        fetcher.fetchSelfRecentImages()
     }
 
     override func didReceiveMemoryWarning() {

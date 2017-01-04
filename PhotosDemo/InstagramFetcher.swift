@@ -35,36 +35,16 @@ class InstagramFetcher {
         return UserDefaults.standard.value(forKey: "instagramAccessToken") as? String
     }()
     
-    func fetchRecent() {
+    func fetchSelfRecentImages() {
         
         guard let token = self.accessToken else {
             return
         }
         
-        
-        let urlString = "https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=\(token)"
+        let urlString = "https://api.instagram.com/v1/users/self/media/recent/?access_token=\(token)&count=10"
+
         Alamofire.request(urlString).responseJSON { response in
             print(response)
         }
     }
-    
-    /*
-    func fetchJSON() {
-        print("fetchJSON")
-    }
-    
-    func authenticateWithInstagram() {
-        
-        guard self.clientID != nil else {
-            print("ERROR")
-            return
-        }
-
-        let urlString = "https://api.instagram.com/oauth/authorize/?client_id=\(self.clientID)&redirect_uri=REDIRECT-URI&response_type=token"
-        Alamofire.request(urlString).response { response in
-            print(response)
-        }
-    }
-    */
-    
 }
