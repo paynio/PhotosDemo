@@ -15,7 +15,6 @@
 		375CB60C1E17FC3B00BB5221 /* InstagramFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375CB6091E17FC3B00BB5221 /* InstagramFetcher.swift */; };
 		375CB60E1E19304100BB5221 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375CB60D1E19304100BB5221 /* LoginViewController.swift */; };
 		3767977A1E1276CA00012899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376797791E1276CA00012899 /* AppDelegate.swift */; };
-		3767977C1E1276CA00012899 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767977B1E1276CA00012899 /* MainCollectionViewController.swift */; };
 		3767977F1E1276CA00012899 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3767977D1E1276CA00012899 /* Main.storyboard */; };
 		376797811E1276CA00012899 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 376797801E1276CA00012899 /* Assets.xcassets */; };
 		376797841E1276CA00012899 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 376797821E1276CA00012899 /* LaunchScreen.storyboard */; };
@@ -23,6 +22,7 @@
 		3767979A1E1276CA00012899 /* PhotosDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376797991E1276CA00012899 /* PhotosDemoUITests.swift */; };
 		379D53AB1E1D365B0082FBD1 /* InstaImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AF42411E1D24E10099454E /* InstaImage.swift */; };
 		379D53AC1E1D365C0082FBD1 /* InstaImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AF42411E1D24E10099454E /* InstaImage.swift */; };
+		379D53AE1E1E4B400082FBD1 /* TopCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379D53AD1E1E4B400082FBD1 /* TopCollectionViewController.swift */; };
 		37AF42421E1D24E10099454E /* InstaImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AF42411E1D24E10099454E /* InstaImage.swift */; };
 		4543E58617E3AFACCF06EC5B /* Pods_PhotosDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15731ECF1FC8DD9B01C59F22 /* Pods_PhotosDemo.framework */; };
 		85CCD8E734B54DA6F9BC2AFD /* Pods_PhotosDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD593D33B5B7F07E1C36F689 /* Pods_PhotosDemoUITests.framework */; };
@@ -54,7 +54,6 @@
 		375CB60D1E19304100BB5221 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		376797761E1276CA00012899 /* PhotosDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotosDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		376797791E1276CA00012899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3767977B1E1276CA00012899 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		3767977E1E1276CA00012899 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		376797801E1276CA00012899 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		376797831E1276CA00012899 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		376797951E1276CA00012899 /* PhotosDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotosDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		376797991E1276CA00012899 /* PhotosDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosDemoUITests.swift; sourceTree = "<group>"; };
 		3767979B1E1276CA00012899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		379D53AD1E1E4B400082FBD1 /* TopCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopCollectionViewController.swift; sourceTree = "<group>"; };
 		37AF42411E1D24E10099454E /* InstaImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaImage.swift; sourceTree = "<group>"; };
 		3FB5DEB165E0CCE62B10A0BC /* Pods-PhotosDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotosDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotosDemoTests/Pods-PhotosDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		4EC066DB50D677BC0F8908BD /* Pods_PhotosDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotosDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				376797791E1276CA00012899 /* AppDelegate.swift */,
-				3767977B1E1276CA00012899 /* MainCollectionViewController.swift */,
+				379D53AD1E1E4B400082FBD1 /* TopCollectionViewController.swift */,
 				375CB60D1E19304100BB5221 /* LoginViewController.swift */,
 				375CB6091E17FC3B00BB5221 /* InstagramFetcher.swift */,
 				37AF42411E1D24E10099454E /* InstaImage.swift */,
@@ -471,9 +471,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				375CB60E1E19304100BB5221 /* LoginViewController.swift in Sources */,
-				3767977C1E1276CA00012899 /* MainCollectionViewController.swift in Sources */,
 				37AF42421E1D24E10099454E /* InstaImage.swift in Sources */,
 				375CB60A1E17FC3B00BB5221 /* InstagramFetcher.swift in Sources */,
+				379D53AE1E1E4B400082FBD1 /* TopCollectionViewController.swift in Sources */,
 				3767977A1E1276CA00012899 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
