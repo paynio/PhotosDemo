@@ -98,8 +98,70 @@
                     <view key="view" contentMode="scaleToFill" id="ycv-WO-VO1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UjB-rL-zgQ">
+                                <rect key="frame" x="0.0" y="28" width="320" height="540"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w1K-G4-2cZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AUTOMATED LOGIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8aU-QB-nZL">
+                                                <rect key="frame" x="82" y="12.5" width="156.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="aoN-eK-THI"/>
+                                            <constraint firstItem="8aU-QB-nZL" firstAttribute="centerY" secondItem="w1K-G4-2cZ" secondAttribute="centerY" id="fQ2-ng-7D7"/>
+                                            <constraint firstItem="8aU-QB-nZL" firstAttribute="centerX" secondItem="w1K-G4-2cZ" secondAttribute="centerX" id="s1b-Uh-ZA3"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YEi-jj-nVM">
+                                        <rect key="frame" x="0.0" y="44" width="320" height="230"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="230" id="jNR-4O-M3Z"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jnb-Js-whL">
+                                        <rect key="frame" x="0.0" y="274" width="320" height="266"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WbF-ev-xa6">
+                                                <rect key="frame" x="35.5" y="88" width="250" height="90"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="250" id="Jr8-CQ-xic"/>
+                                                </constraints>
+                                                <string key="text">Instagram should automatically login using my personal creds.
+
+If not, please enter your own creds to continue.</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="WbF-ev-xa6" firstAttribute="centerX" secondItem="Jnb-Js-whL" secondAttribute="centerX" id="Nhf-3n-C4Y"/>
+                                            <constraint firstItem="WbF-ev-xa6" firstAttribute="centerY" secondItem="Jnb-Js-whL" secondAttribute="centerY" id="xjv-j9-2H9"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UjB-rL-zgQ" firstAttribute="centerX" secondItem="ycv-WO-VO1" secondAttribute="centerX" id="Bch-3E-NFO"/>
+                            <constraint firstItem="UjB-rL-zgQ" firstAttribute="top" secondItem="tcO-ra-amN" secondAttribute="bottom" constant="8" id="G4S-da-7PK"/>
+                            <constraint firstItem="UjB-rL-zgQ" firstAttribute="width" secondItem="ycv-WO-VO1" secondAttribute="width" id="deZ-qs-fLb"/>
+                            <constraint firstItem="UjB-rL-zgQ" firstAttribute="height" secondItem="ycv-WO-VO1" secondAttribute="height" constant="-28" id="n1z-IK-eyy"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webViewContainer" destination="YEi-jj-nVM" id="q27-gY-t65"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vJ0-h1-aYj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
