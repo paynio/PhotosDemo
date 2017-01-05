@@ -16,6 +16,7 @@ class SingleImageViewController: UIViewController {
     
     var imageData:InstaImage?
     var filters:[CIFilter]?
+    var originalImage:CIImage?
     var currentIndex = -1
     
     @IBOutlet weak var topImageView: UIImageView!
@@ -32,9 +33,10 @@ class SingleImageViewController: UIViewController {
         if let image = imageData, let imageURL = image.standardResolutionURLString {
             self.topImageView.af_setImage(withURL: URL(string: imageURL)!) { res in
                 print("done!")
-                let ciImage = CIImage(image: self.topImageView.image!)
-                self.filters = ciImage?.autoAdjustmentFilters()
-                print(ciImage?.autoAdjustmentFilters())
+                
+                self.originalImage = CIImage(image: self.topImageView.image!)
+                self.filters = self.originalImage?.autoAdjustmentFilters()
+                print(self.originalImage?.autoAdjustmentFilters())
                 print(self.filters?.count)
             }
         }
@@ -65,10 +67,20 @@ class SingleImageViewController: UIViewController {
     func setNameLabel() {
         if self.currentIndex == -1 {
             self.filterNameLabel.text = "No Filter Selected"
+            
+            if let image = self.originalImage {
+                self.topImageView.image = UIImage(ciImage: image)
+            }
         }
         else {
             if let filter = self.filters?[self.currentIndex] {
                 self.filterNameLabel.text = filter.name
+                
+                filter.setValue(self.originalImage, forKey: kCIInputImageKey)
+                DispatchQueue.main.async {
+                    self.topImageView.image = UIImage(ciImage:   filter.outputImage!)
+                }
+                
             }
         }
     }
