@@ -12,32 +12,31 @@ import CoreImage
 
 class SingleImageViewController: UIViewController {
 
+    @IBOutlet weak var filterNameLabel: UILabel!
+    
     var imageData:InstaImage?
-    var filters:[String]?
+    var filters:[CIFilter]?
+    var currentIndex = -1
     
     @IBOutlet weak var topImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
-        
-        // self.filters = CIFilter.filterNames(inCategories: [kCICategoryColorEffect, kCICategoryStillImage])
-        // let filter = CIFilter(name:self.filters![1])
-        
-        // print(filter!.attributes)
+        setNameLabel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if let image = imageData, let imageURL = image.standardResolutionURLString {
-            self.topImageView.af_setImage(withURL: URL(string: imageURL)!, imageTransition: .curlUp(3.0))/* { res in
+            self.topImageView.af_setImage(withURL: URL(string: imageURL)!) { res in
                 print("done!")
                 let ciImage = CIImage(image: self.topImageView.image!)
+                self.filters = ciImage?.autoAdjustmentFilters()
                 print(ciImage?.autoAdjustmentFilters())
-            }*/
+                print(self.filters?.count)
+            }
         }
 
     }
@@ -47,6 +46,32 @@ class SingleImageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func previousButtonPressed(_ sender: Any) {
+        self.currentIndex -= 1
+        if self.currentIndex == -2 {
+            self.currentIndex = -1
+        }
+        setNameLabel()
+    }
+    
+    @IBAction func nextButtonPressed(_ sender: Any) {
+        self.currentIndex += 1
+        if self.currentIndex == self.filters?.count {
+            self.currentIndex = (self.filters?.count)! - 1
+        }
+        setNameLabel()
+    }
+    
+    func setNameLabel() {
+        if self.currentIndex == -1 {
+            self.filterNameLabel.text = "No Filter Selected"
+        }
+        else {
+            if let filter = self.filters?[self.currentIndex] {
+                self.filterNameLabel.text = filter.name
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation
