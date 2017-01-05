@@ -66,6 +66,7 @@ class InstagramFetcher {
                 }
             }
             
+            print("Items: \(images.count)")
             completionHandler(images)
         }
     }
