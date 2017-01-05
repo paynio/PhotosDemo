@@ -8,20 +8,38 @@
 
 import UIKit
 import AlamofireImage
+import CoreImage
 
 class SingleImageViewController: UIViewController {
 
-    @IBOutlet weak var mainImageView: UIImageView!
     var imageData:InstaImage?
+    var filters:[String]?
+    
+    @IBOutlet weak var topImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
+        
+        // self.filters = CIFilter.filterNames(inCategories: [kCICategoryColorEffect, kCICategoryStillImage])
+        // let filter = CIFilter(name:self.filters![1])
+        
+        // print(filter!.attributes)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         if let image = imageData, let imageURL = image.standardResolutionURLString {
-            self.mainImageView.af_setImage(withURL: URL(string: imageURL)!)
+            self.topImageView.af_setImage(withURL: URL(string: imageURL)!, imageTransition: .curlUp(3.0))/* { res in
+                print("done!")
+                let ciImage = CIImage(image: self.topImageView.image!)
+                print(ciImage?.autoAdjustmentFilters())
+            }*/
         }
+
     }
 
     override func didReceiveMemoryWarning() {
