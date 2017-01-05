@@ -20,51 +20,57 @@ extension WKWebView {
 class LoginViewController: UIViewController, WKNavigationDelegate {
     
     private var webView: WKWebView?
+    @IBOutlet weak var webViewContainer: UIView!
     
     // redirectURI to match that configured on Instagram portal
+    
     let redirectURI = "https://github.com/paynio/PhotosDemo"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
-        webView = WKWebView(frame:view.bounds)
-        webView?.navigationDelegate = self
-        view.addSubview(webView!)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        let fetcher = InstagramFetcher()
+        let frame = CGRect(x: 0, y: 0, width: self.webViewContainer.frame.size.width, height: self.webViewContainer.frame.size.height)
+        self.webView = WKWebView(frame:frame)
+        self.webView?.navigationDelegate = self
+        self.webViewContainer.addSubview(webView!)
         
-        guard let clientID = fetcher.clientID else {
+        guard let clientID = CredsFetcher().getCred(forInstaCred: .ClientID) else {
             print("FAILED TO GET CLIENT ID")
             return
         }
         
         let urlString = "https://api.instagram.com/oauth/authorize/?client_id=\(clientID)&redirect_uri=\(redirectURI)&response_type=token"
-
         webView?.loadUrl(string: urlString)
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+}
 
+// MARK: - WKNavigationDelegate
+
+extension LoginViewController {
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
         guard let url = navigationAction.request.url else {
             decisionHandler(.allow)
             return
         }
         
         if url.host == "github.com" {
-            print(navigationAction.request.url!)
-            print("HIYA!")
             
             if let urlFragment = url.fragment {
                 let accessToken = urlFragment.replacingOccurrences(of: "access_token=", with: "")
                 UserDefaults.standard.setValue(accessToken, forKey: "instagramAccessToken")
                 
-                print(accessToken)
                 self.dismiss(animated: true)
             }
             decisionHandler(.cancel)
@@ -73,20 +79,24 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
         decisionHandler(.allow)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        
+        // Pre-populates the webView with creds from Creds.plist. This is to help smooth the login process.
+        // This is just to help you login with the demo: it should never be placed anywhere near production code!
+        
+        let creds = CredsFetcher()
+        
+        guard let username = creds.getCred(forInstaCred: .UserName),
+            let password = creds.getCred(forInstaCred: .Password) else {
+                return
+        }
+        
+        webView.evaluateJavaScript("document.getElementById('id_username').value= '\(username)'") { (res, error) in
+            webView.evaluateJavaScript("document.getElementById('id_password').value= '\(password)'") { (res, error) in
+                webView.evaluateJavaScript("document.querySelector('input[type=submit]').click();") { (res, error) in
+                    
+                }
+            }
+        }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

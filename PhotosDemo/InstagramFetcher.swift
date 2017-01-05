@@ -11,26 +11,6 @@ import Alamofire
 
 class InstagramFetcher {
     
-    let clientID = { () -> String? in
-        var propListFormat = PropertyListSerialization.PropertyListFormat.xml
-        var plistData: [String: AnyObject] = [:]
-        let plistPath: String? = Bundle.main.path(forResource: "Creds", ofType: "plist")!
-        let plistXML = FileManager.default.contents(atPath: plistPath!)!
-        do {
-            plistData = try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propListFormat) as! [String:AnyObject]
-        } catch {
-            print("Error reading Creds.plist")
-            return nil
-        }
-        
-        for (key, value) in plistData {
-            print("key:", key)
-            print("value:", value)
-        }
-        
-        return plistData["InstagramClientID"] as? String
-    }()
-    
     let accessToken = { () -> String? in
         return UserDefaults.standard.value(forKey: "instagramAccessToken") as? String
     }()
