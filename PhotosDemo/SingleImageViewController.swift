@@ -36,11 +36,21 @@ class SingleImageViewController: UIViewController {
                 
                 self.originalImage = CIImage(image: self.topImageView.image!)
                 self.filters = self.originalImage?.autoAdjustmentFilters()
-                print(self.originalImage?.autoAdjustmentFilters())
-                print(self.filters?.count)
+                
+                self.addExtraFilters()
             }
         }
-
+    }
+    
+    func addExtraFilters() {
+        
+        let filterNames = ["CIPhotoEffectFade", "CIPhotoEffectNoir",  "CIColorInvert", "CITwirlDistortion"]
+        
+        for name in filterNames {
+            if let filter = CIFilter(name: name) {
+                self.filters?.append(filter)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,7 +61,7 @@ class SingleImageViewController: UIViewController {
     @IBAction func previousButtonPressed(_ sender: Any) {
         self.currentIndex -= 1
         if self.currentIndex == -2 {
-            self.currentIndex = -1
+            self.currentIndex = (self.filters?.count)! - 1
         }
         setNameLabel()
     }
@@ -59,7 +69,7 @@ class SingleImageViewController: UIViewController {
     @IBAction func nextButtonPressed(_ sender: Any) {
         self.currentIndex += 1
         if self.currentIndex == self.filters?.count {
-            self.currentIndex = (self.filters?.count)! - 1
+            self.currentIndex = -1
         }
         setNameLabel()
     }
