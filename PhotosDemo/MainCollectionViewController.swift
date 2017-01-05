@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainCollectionViewController: UIViewController {
     
     var imageData: [InstaImage]?
     

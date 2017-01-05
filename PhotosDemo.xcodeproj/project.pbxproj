@@ -15,7 +15,7 @@
 		375CB60C1E17FC3B00BB5221 /* InstagramFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375CB6091E17FC3B00BB5221 /* InstagramFetcher.swift */; };
 		375CB60E1E19304100BB5221 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375CB60D1E19304100BB5221 /* LoginViewController.swift */; };
 		3767977A1E1276CA00012899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376797791E1276CA00012899 /* AppDelegate.swift */; };
-		3767977C1E1276CA00012899 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767977B1E1276CA00012899 /* ViewController.swift */; };
+		3767977C1E1276CA00012899 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767977B1E1276CA00012899 /* MainCollectionViewController.swift */; };
 		3767977F1E1276CA00012899 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3767977D1E1276CA00012899 /* Main.storyboard */; };
 		376797811E1276CA00012899 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 376797801E1276CA00012899 /* Assets.xcassets */; };
 		376797841E1276CA00012899 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 376797821E1276CA00012899 /* LaunchScreen.storyboard */; };
@@ -54,7 +54,7 @@
 		375CB60D1E19304100BB5221 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		376797761E1276CA00012899 /* PhotosDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotosDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		376797791E1276CA00012899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3767977B1E1276CA00012899 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3767977B1E1276CA00012899 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		3767977E1E1276CA00012899 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		376797801E1276CA00012899 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		376797831E1276CA00012899 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				376797791E1276CA00012899 /* AppDelegate.swift */,
-				3767977B1E1276CA00012899 /* ViewController.swift */,
+				3767977B1E1276CA00012899 /* MainCollectionViewController.swift */,
 				375CB60D1E19304100BB5221 /* LoginViewController.swift */,
 				375CB6091E17FC3B00BB5221 /* InstagramFetcher.swift */,
 				37AF42411E1D24E10099454E /* InstaImage.swift */,
@@ -471,7 +471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				375CB60E1E19304100BB5221 /* LoginViewController.swift in Sources */,
-				3767977C1E1276CA00012899 /* ViewController.swift in Sources */,
+				3767977C1E1276CA00012899 /* MainCollectionViewController.swift in Sources */,
 				37AF42421E1D24E10099454E /* InstaImage.swift in Sources */,
 				375CB60A1E17FC3B00BB5221 /* InstagramFetcher.swift in Sources */,
 				3767977A1E1276CA00012899 /* AppDelegate.swift in Sources */,
