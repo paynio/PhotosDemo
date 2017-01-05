@@ -14,6 +14,7 @@ fileprivate let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0
 class TopCollectionViewController: UICollectionViewController {
 
     var imageData: [InstaImage]?
+    var selectedIndexPath: IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,15 +53,26 @@ class TopCollectionViewController: UICollectionViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
+    func getImageData(forIndexPath indexPath: IndexPath) -> InstaImage? {
+        return self.imageData?[(indexPath as NSIndexPath).row]
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "showImageIdentifier" {
+            let VC = segue.destination as! SingleImageViewController
+            
+            if let indexPath = self.selectedIndexPath {
+                VC.imageData = self.getImageData(forIndexPath: indexPath)
+                self.selectedIndexPath = nil
+            }
+        }
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
     }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -128,4 +140,9 @@ class TopCollectionViewController: UICollectionViewController {
     
     }
     */
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedIndexPath = indexPath
+        self.performSegue(withIdentifier: "showImageIdentifier", sender: self)
+    }
 }
