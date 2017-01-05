@@ -21,9 +21,6 @@ class TopCollectionViewController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
         // Do any additional setup after loading the view.
     }
     
@@ -85,9 +82,18 @@ class TopCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InstaImageCollectionViewCell
     
         // Configure the cell
+        
+        guard let instaImage = self.imageData?[(indexPath as NSIndexPath).row] else {
+            return cell
+        }
+        
+        if let thumb = instaImage.thumbnailURLString {
+            cell.configureCell(with: thumb, placeholderImage: nil)
+        }
+        
         cell.backgroundColor = UIColor.black
         return cell
     }
@@ -122,5 +128,4 @@ class TopCollectionViewController: UICollectionViewController {
     
     }
     */
-
 }
