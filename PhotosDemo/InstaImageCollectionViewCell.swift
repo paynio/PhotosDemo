@@ -16,13 +16,6 @@ class InstaImageCollectionViewCell: UICollectionViewCell {
     func configureCell(with URLString: String, placeholderImage: UIImage?) {
         
         mainImageView.af_setImage(withURL:  URL(string: URLString)!)
-        
-        /*
-        withURL: URL(string: URLString)!,
-        placeholderImage: placeholderImage,
-        filter: AspectScaledToFillSizeWithRoundedCornersFilter(size: size, radius: 20.0),
-        imageTransition: .crossDissolve(0.2)
-        */
     }
     
     override func prepareForReuse() {
