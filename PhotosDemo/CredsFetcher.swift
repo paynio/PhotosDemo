@@ -31,13 +31,6 @@ class CredsFetcher {
         } catch {
             print("Error reading Creds.plist")
         }
-        
-        /*
-        for (key, value) in plistCreds! {
-            print("key:", key)
-            print("value:", value)
-        }
-         */
     }
     
     func getCred(forInstaCred cred:InstaCred) -> String? {

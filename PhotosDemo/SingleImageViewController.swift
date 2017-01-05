@@ -8,19 +8,48 @@
 
 import UIKit
 import AlamofireImage
+import CoreImage
 
 class SingleImageViewController: UIViewController {
 
-    @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var filterNameLabel: UILabel!
+    
     var imageData:InstaImage?
+    var filters:[CIFilter]?
+    var originalImage:CIImage?
+    var currentIndex = -1
+    
+    @IBOutlet weak var topImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        setNameLabel()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         if let image = imageData, let imageURL = image.standardResolutionURLString {
-            self.mainImageView.af_setImage(withURL: URL(string: imageURL)!)
+            self.topImageView.af_setImage(withURL: URL(string: imageURL)!) { res in
+                print("done!")
+                
+                self.originalImage = CIImage(image: self.topImageView.image!)
+                self.filters = self.originalImage?.autoAdjustmentFilters()
+                
+                self.addExtraFilters()
+            }
+        }
+    }
+    
+    func addExtraFilters() {
+        
+        let filterNames = ["CIPhotoEffectFade", "CIPhotoEffectNoir",  "CIColorInvert", "CITwirlDistortion"]
+        
+        for name in filterNames {
+            if let filter = CIFilter(name: name) {
+                self.filters?.append(filter)
+            }
         }
     }
 
@@ -29,15 +58,40 @@ class SingleImageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func previousButtonPressed(_ sender: Any) {
+        self.currentIndex -= 1
+        if self.currentIndex == -2 {
+            self.currentIndex = (self.filters?.count)! - 1
+        }
+        setNameLabel()
     }
-    */
-
+    
+    @IBAction func nextButtonPressed(_ sender: Any) {
+        self.currentIndex += 1
+        if self.currentIndex == self.filters?.count {
+            self.currentIndex = -1
+        }
+        setNameLabel()
+    }
+    
+    func setNameLabel() {
+        if self.currentIndex == -1 {
+            self.filterNameLabel.text = "No Filter Selected"
+            
+            if let image = self.originalImage {
+                self.topImageView.image = UIImage(ciImage: image)
+            }
+        }
+        else {
+            if let filter = self.filters?[self.currentIndex] {
+                self.filterNameLabel.text = filter.name
+                
+                filter.setValue(self.originalImage, forKey: kCIInputImageKey)
+                DispatchQueue.main.async {
+                    self.topImageView.image = UIImage(ciImage:   filter.outputImage!)
+                }
+                
+            }
+        }
+    }
 }
