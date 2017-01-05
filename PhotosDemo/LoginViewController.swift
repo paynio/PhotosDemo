@@ -37,9 +37,7 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let fetcher = InstagramFetcher()
-        
-        guard let clientID = fetcher.clientID else {
+        guard let clientID = CredsFetcher().getCred(forInstaCred: .ClientID) else {
             print("FAILED TO GET CLIENT ID")
             return
         }

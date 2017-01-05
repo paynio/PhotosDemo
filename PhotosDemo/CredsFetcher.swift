@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 enum InstaCred: String {
     case ClientID = "InstagramClientID"
     case ClientSecret = "InstagramClientSecret"
@@ -25,25 +24,18 @@ class CredsFetcher {
         // Set up plistCreds
         
         var propListFormat = PropertyListSerialization.PropertyListFormat.xml
-        var plistData: [String: String] = [:]
         let plistPath: String? = Bundle.main.path(forResource: "Creds", ofType: "plist")!
         let plistXML = FileManager.default.contents(atPath: plistPath!)!
         do {
-            plistData = try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propListFormat) as! [String:String] as [String : String]
+            plistCreds = try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propListFormat) as! [String:String] as [String : String]
         } catch {
             print("Error reading Creds.plist")
         }
         
-        for (key, value) in plistData {
+        for (key, value) in plistCreds! {
             print("key:", key)
             print("value:", value)
         }
-        
-        plistCreds =
-        
-        return plistData["InstagramClientID"] as? String
-
-        
     }
     
     func getCred(forInstaCred cred:InstaCred) -> String? {
