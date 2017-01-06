@@ -24,7 +24,9 @@ class InstaImageCollectionViewCell: UICollectionViewCell {
         mainImageView.af_setImage(withURL:  URL(string: thumb)!)
         
         if let text = insta.descText {
-            self.descTextLabel.text = text
+            self.descTextLabel.text = text.uppercased()
+        } else {
+            self.descTextLabel.text = "NO CAPTION"
         }
     }
     
