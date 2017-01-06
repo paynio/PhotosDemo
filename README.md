@@ -22,7 +22,7 @@ To avoid sharing creds within a public repository, they will be emailed to you s
 Instagram requires users to authenticate to receive an access token as explained [here](https://www.instagram.com/developer/authentication/). To help improve the first use experience of the app, if the correct creds are entered, the application will automatically login you in. Notes:
 
 - LoginViewController uses evaluateJavaScript function to pre-populate username & password fields, and then to simulate login click
-- This would never be used in production code, but is demonstrated here to highlight how to interact with JS in a WKWebView
+- **This would never be used in production code, but is demonstrated here to highlight how to interact with JS in a WKWebView**
 - The access token is retrieved and stored in UserDefaults. For production code, it would be much more preferable to store in Keychain
 
 ### API Retrieval
