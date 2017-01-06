@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Top Collection View Controller-->
+        <!--PHOTO DEMO-->
         <scene sceneID="9Bj-GT-zeH">
             <objects>
                 <collectionViewController id="9oz-nb-TIk" customClass="TopCollectionViewController" customModule="PhotosDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,28 +19,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0fI-n9-1f7">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="75" height="75"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InstaCell" id="UcY-dl-Ciu" customClass="InstaImageCollectionViewCell" customModule="PhotosDemo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                <rect key="frame" x="10" y="10" width="75" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fuh-lI-zCZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fuh-lI-zCZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" red="1" green="0.98616304048930004" blue="0.21531056711271312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="customSize" width="100" height="100"/>
+                                <size key="customSize" width="75" height="75"/>
                                 <connections>
                                     <outlet property="mainImageView" destination="fuh-lI-zCZ" id="12w-oh-cQm"/>
                                 </connections>
@@ -51,7 +51,7 @@
                             <outlet property="delegate" destination="9oz-nb-TIk" id="T30-cj-xta"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="XgL-WT-n85"/>
+                    <navigationItem key="navigationItem" title="PHOTO DEMO" id="XgL-WT-n85"/>
                     <connections>
                         <segue destination="GMs-HD-f0g" kind="presentation" identifier="loginIdentifier" id="R86-0V-Nbx"/>
                         <segue destination="a5k-Br-wds" kind="show" identifier="showImageIdentifier" id="5AE-cW-hBa"/>
@@ -135,6 +135,8 @@
                     </view>
                     <connections>
                         <outlet property="filterNameLabel" destination="H3o-i4-1py" id="S1u-M1-NI2"/>
+                        <outlet property="nextButton" destination="n1s-Wn-JPr" id="gpV-qr-izI"/>
+                        <outlet property="previousButton" destination="gFo-Xb-39h" id="apj-xF-b6E"/>
                         <outlet property="topImageView" destination="bQ3-EQ-Pz4" id="9qO-5i-clY"/>
                     </connections>
                 </viewController>
