@@ -11,7 +11,7 @@ import AlamofireImage
 import CoreImage
 
 class SingleImageViewController: UIViewController {
-
+    
     @IBOutlet weak var filterNameLabel: UILabel!
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
@@ -54,7 +54,7 @@ class SingleImageViewController: UIViewController {
             }
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -65,6 +65,7 @@ class SingleImageViewController: UIViewController {
         if self.currentIndex == -2 {
             self.currentIndex = (self.filters?.count)! - 1
         }
+        self.enableButtons(enabled: false)
         setNameLabel()
     }
     
@@ -73,7 +74,26 @@ class SingleImageViewController: UIViewController {
         if self.currentIndex == self.filters?.count {
             self.currentIndex = -1
         }
+        self.enableButtons(enabled: false)
         setNameLabel()
+    }
+    
+    func enableButtons(enabled: Bool) {
+        self.previousButton.isEnabled = enabled
+        self.nextButton.isEnabled = enabled
+    }
+    
+    func transitionTopImage(toCIImage ciImage:CIImage) {
+        let uiImage = UIImage(ciImage: ciImage)
+        DispatchQueue.main.async {
+            UIView.transition(with: self.topImageView,
+                              duration: 0.5,
+                              options: .transitionCrossDissolve,
+                              animations: { self.topImageView.image = uiImage },
+                              completion: { completed in
+                                self.enableButtons(enabled: true)
+            })
+        }
     }
     
     func setNameLabel() {
@@ -81,31 +101,26 @@ class SingleImageViewController: UIViewController {
             self.filterNameLabel.text = "No Filter Selected"
             
             if let image = self.originalImage {
-                self.topImageView.image = UIImage(ciImage: image)
+                self.transitionTopImage(toCIImage: image)
             }
         }
         else {
             if let filter = self.filters?[self.currentIndex] {
                 self.filterNameLabel.text = filter.name
                 
-                filter.setValue(self.originalImage, forKey: kCIInputImageKey)
-                
-                
-                    self.previousButton.isEnabled = false
-                    self.nextButton.isEnabled = false
-
-                    UIView.transition(with: self.topImageView,
-                                      duration: 0.5,
-                                      options: .transitionCrossDissolve,
-                                      animations: { self.topImageView.image = UIImage(ciImage:   filter.outputImage!) },
-                                      completion: { completed in
-                                        self.previousButton.isEnabled = true
-                                        self.nextButton.isEnabled = true
-                    })
+                DispatchQueue.global(qos: .userInitiated).async {
+                    filter.setValue(self.originalImage, forKey: kCIInputImageKey)
                     
-                    //self.topImageView.image = UIImage(ciImage:   filter.outputImage!)
-                
+                    guard let outputImage = filter.outputImage else {
+                        self.enableButtons(enabled: true)
+                        return
+                    }
+                    
+                    self.transitionTopImage(toCIImage: outputImage)
+                    
+                }
             }
         }
     }
 }
+
