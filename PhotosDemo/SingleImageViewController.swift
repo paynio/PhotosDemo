@@ -10,11 +10,13 @@ import UIKit
 import AlamofireImage
 import CoreImage
 
-class SingleImageViewController: UIViewController {
+class SingleImageViewController: UIViewController, CAAnimationDelegate {
     
     @IBOutlet weak var filterNameLabel: UILabel!
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var activityView: UIActivityIndicatorView!
     
     var imageData:InstaImage?
     var filters:[CIFilter]?
@@ -26,7 +28,13 @@ class SingleImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.enableButtons(enabled: false)
+        
         setNameLabel()
+        if let caption = imageData?.descText {
+            self.captionLabel.text = caption.uppercased()
+        }
+        self.activityView.startAnimating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -34,12 +42,16 @@ class SingleImageViewController: UIViewController {
         
         if let image = imageData, let imageURL = image.standardResolutionURLString {
             self.topImageView.af_setImage(withURL: URL(string: imageURL)!) { res in
-                print("done!")
                 
                 self.originalImage = CIImage(image: self.topImageView.image!)
                 self.filters = self.originalImage?.autoAdjustmentFilters()
                 
                 self.addExtraFilters()
+                
+                self.activityView.stopAnimating()
+                self.activityView.isHidden = true
+                
+                self.enableButtons(enabled: true)
             }
         }
     }
@@ -84,21 +96,21 @@ class SingleImageViewController: UIViewController {
     }
     
     func transitionTopImage(toCIImage ciImage:CIImage) {
-        let uiImage = UIImage(ciImage: ciImage)
+     
         DispatchQueue.main.async {
-            UIView.transition(with: self.topImageView,
-                              duration: 0.5,
-                              options: .transitionCrossDissolve,
-                              animations: { self.topImageView.image = uiImage },
-                              completion: { completed in
-                                self.enableButtons(enabled: true)
-            })
+            let toImage = UIImage(ciImage: ciImage)
+            
+            UIView.transition(with: self.topImageView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.topImageView.image = toImage
+            }) { completed in
+                self.enableButtons(enabled: true)
+            }
         }
     }
     
     func setNameLabel() {
         if self.currentIndex == -1 {
-            self.filterNameLabel.text = "No Filter Selected"
+            self.filterNameLabel.text = "NO FILTER SELECTED"
             
             if let image = self.originalImage {
                 self.transitionTopImage(toCIImage: image)
@@ -106,7 +118,7 @@ class SingleImageViewController: UIViewController {
         }
         else {
             if let filter = self.filters?[self.currentIndex] {
-                self.filterNameLabel.text = filter.name
+                self.filterNameLabel.text = "FILTER NAME: \(filter.name)"
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     filter.setValue(self.originalImage, forKey: kCIInputImageKey)

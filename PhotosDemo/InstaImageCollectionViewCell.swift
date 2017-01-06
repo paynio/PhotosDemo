@@ -12,10 +12,28 @@ import AlamofireImage
 class InstaImageCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var descTextLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     
-    func configureCell(with URLString: String, placeholderImage: UIImage?) {
+    func configureCell(withInstaImage insta: InstaImage) {
         
-        mainImageView.af_setImage(withURL:  URL(string: URLString)!)
+        guard let thumb = insta.thumbnailURLString else {
+            return
+        }
+        
+        mainImageView.af_setImage(withURL:  URL(string: thumb)!)
+        
+        if let text = insta.descText {
+            self.descTextLabel.text = text.uppercased()
+        } else {
+            self.descTextLabel.text = "NO CAPTION"
+        }
+        
+        if let user = insta.userName {
+            self.usernameLabel.text = user
+        } else {
+            self.usernameLabel.text = "No user data"
+        }
     }
     
     override func prepareForReuse() {

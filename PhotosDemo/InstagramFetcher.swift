@@ -44,6 +44,9 @@ class InstagramFetcher {
                 if let instaImage = InstaImage(json: item) {
                     images.append(instaImage)
                 }
+                
+                print(item)
+                print("\n\n")
             }
             
             print("Items: \(images.count)")
