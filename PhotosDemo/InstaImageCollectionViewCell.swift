@@ -28,6 +28,12 @@ class InstaImageCollectionViewCell: UICollectionViewCell {
         } else {
             self.descTextLabel.text = "NO CAPTION"
         }
+        
+        if let user = insta.userName {
+            self.usernameLabel.text = user
+        } else {
+            self.usernameLabel.text = "No user data"
+        }
     }
     
     override func prepareForReuse() {

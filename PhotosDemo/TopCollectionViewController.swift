@@ -18,9 +18,8 @@ class TopCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        
+        self.customiseCollectionViewLayout()
         
         let fetcher = InstagramFetcher()
         fetcher.fetchSelfRecentImages() { imagesResponse in
@@ -32,6 +31,21 @@ class TopCollectionViewController: UICollectionViewController {
             self.imageData = images
             self.collectionView?.reloadData()
         }
+    }
+    
+    func customiseCollectionViewLayout() {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        let width = UIScreen.main.bounds.width
+        
+        // Fixed item size for speed of set-up. We could of course programmatically change/calculate cell size as well
+        let spacing = (width - 300) / 3
+        print(spacing)
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        layout.itemSize = CGSize(width:150, height:75)
+        layout.minimumInteritemSpacing = spacing
+        layout.minimumLineSpacing = spacing
+        layout.footerReferenceSize = CGSize(width:width, height: 75)
+        collectionView!.collectionViewLayout = layout
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -108,37 +122,6 @@ class TopCollectionViewController: UICollectionViewController {
         
         return UICollectionReusableView()
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedIndexPath = indexPath

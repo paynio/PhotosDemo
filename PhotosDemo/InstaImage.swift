@@ -16,6 +16,7 @@ struct InstaImage: CustomStringConvertible {
     var standardResolutionWidth: Int?
     var instagramID: String?
     var descText: String?
+    var userName: String?
     
     var description: String {
         if let thumb = thumbnailURLString, let idStr = instagramID, let height = standardResolutionHeight {
@@ -54,7 +55,12 @@ extension InstaImage {
         if let caption = json["caption"] as? [String:Any] {
             if let text = caption["text"] as? String {
                 self.descText = text
-
+            }
+            
+            if let from = caption["from"] as? [String:Any] {
+                if let username = from["username"] as? String {
+                    self.userName = username
+                }
             }
         }
     }
