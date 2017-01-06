@@ -15,6 +15,7 @@ struct InstaImage: CustomStringConvertible {
     var standardResolutionHeight: Int?
     var standardResolutionWidth: Int?
     var instagramID: String?
+    var descText: String?
     
     var description: String {
         if let thumb = thumbnailURLString, let idStr = instagramID, let height = standardResolutionHeight {
@@ -47,5 +48,11 @@ extension InstaImage {
         self.standardResolutionHeight = standardHeight
         self.standardResolutionWidth = standardWidth
         self.instagramID = instaID
+        
+        // Done separately as may not always contains text, so doesn't need a guard statement
+        
+        if let text = json["text"] as? String {
+            self.descText = text
+        }
     }
 }

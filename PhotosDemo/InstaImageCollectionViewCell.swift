@@ -12,10 +12,13 @@ import AlamofireImage
 class InstaImageCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var descTextLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     func configureCell(with URLString: String, placeholderImage: UIImage?) {
         
         mainImageView.af_setImage(withURL:  URL(string: URLString)!)
+        self.backgroundColor = UIColor.lightGray
     }
     
     override func prepareForReuse() {
