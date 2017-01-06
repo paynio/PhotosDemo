@@ -10,10 +10,8 @@ import Foundation
 
 enum InstaCred: String {
     case ClientID = "InstagramClientID"
-    case ClientSecret = "InstagramClientSecret"
     case UserName = "InstagramUserName"
     case Password = "InstagramPassword"
-
 }
 
 class CredsFetcher {
