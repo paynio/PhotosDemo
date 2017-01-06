@@ -62,7 +62,7 @@ class SingleImageViewController: UIViewController, CAAnimationDelegate {
         
         for name in filterNames {
             if let filter = CIFilter(name: name) {
-                self.filters?.append(filter)
+                self.filters?.insert(filter, at: 0)
             }
         }
     }
