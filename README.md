@@ -31,7 +31,7 @@ Instagram requires users to authenticate to receive an access token as explained
 
 - Fetches recent images for the logged in user.
 - If using provided creds, there are 10 images saved already in Instagram on that particular user.
-- Application not tested with different login creds, but if there is recent activity for a different user, it is anticipated that the API should work in the same way. By default, we pull most recent 10 images, but this can be configured in fetchSelfRecentImages in [InstagramFetcher.swift](PhotosDemo/PhotosDemo/InstagramFetcher.swift)
+- Application not tested with different login creds, but if there is recent activity for a different user, it is anticipated that the API should work in the same way. By default, we pull most recent 10 images, but this can be configured in fetchSelfRecentImages in InstagramFetcher.swift
 
 ### JSON Parsing
 
