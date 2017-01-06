@@ -15,7 +15,7 @@
         <scene sceneID="9Bj-GT-zeH">
             <objects>
                 <collectionViewController id="9oz-nb-TIk" customClass="TopCollectionViewController" customModule="PhotosDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="5yZ-88-Gk4">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5yZ-88-Gk4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -264,9 +264,16 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YEi-jj-nVM">
                                         <rect key="frame" x="0.0" y="44" width="320" height="230"/>
+                                        <subviews>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="JiV-9k-VQp">
+                                                <rect key="frame" x="150" y="105" width="20" height="20"/>
+                                            </activityIndicatorView>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="JiV-9k-VQp" firstAttribute="centerX" secondItem="YEi-jj-nVM" secondAttribute="centerX" id="H5h-bM-efp"/>
                                             <constraint firstAttribute="height" constant="230" id="jNR-4O-M3Z"/>
+                                            <constraint firstItem="JiV-9k-VQp" firstAttribute="centerY" secondItem="YEi-jj-nVM" secondAttribute="centerY" id="rJp-HV-Peh"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jnb-Js-whL">
@@ -303,6 +310,7 @@ If not, please enter your own creds to continue.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="JiV-9k-VQp" id="ZNk-Ui-MfW"/>
                         <outlet property="webViewContainer" destination="YEi-jj-nVM" id="q27-gY-t65"/>
                     </connections>
                 </viewController>

@@ -21,6 +21,7 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
     
     private var webView: WKWebView?
     @IBOutlet weak var webViewContainer: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // redirectURI to match that configured on Instagram portal
     
@@ -38,6 +39,8 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
         self.webView = WKWebView(frame:frame)
         self.webView?.navigationDelegate = self
         self.webViewContainer.addSubview(webView!)
+        self.webViewContainer.bringSubview(toFront: self.activityIndicator)
+        self.activityIndicator.startAnimating()
         
         guard let clientID = CredsFetcher().getCred(forInstaCred: .ClientID) else {
             print("FAILED TO GET CLIENT ID")
@@ -83,6 +86,9 @@ extension LoginViewController {
         
         // Pre-populates the webView with creds from Creds.plist. This is to help smooth the login process.
         // This is just to help you login with the demo: it should never be placed anywhere near production code!
+        
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.isHidden = true
         
         let creds = CredsFetcher()
         

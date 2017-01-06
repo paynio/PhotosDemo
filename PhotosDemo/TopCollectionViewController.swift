@@ -14,12 +14,33 @@ class TopCollectionViewController: UICollectionViewController {
 
     var imageData: [InstaImage]?
     var selectedIndexPath: IndexPath?
+    var firstLoad = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.customiseCollectionViewLayout()
+        self.fetchImageData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if self.firstLoad {
+            self.firstLoad = false
+            self.fetchImageData()
+        }
         
+        // Check for existence of access token. If not present, fetch it
+        
+        guard (UserDefaults.standard.value(forKey: "instagramAccessToken") != nil) else {
+            self.performSegue(withIdentifier: "loginIdentifier", sender: self)
+            self.firstLoad = true
+            return
+        }
+    }
+    
+    func fetchImageData() {
         let fetcher = InstagramFetcher()
         fetcher.fetchSelfRecentImages() { imagesResponse in
             
@@ -44,18 +65,6 @@ class TopCollectionViewController: UICollectionViewController {
         layout.minimumLineSpacing = spacing
         layout.footerReferenceSize = CGSize(width:width, height: 75)
         collectionView!.collectionViewLayout = layout
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Check for existence of access token. If not present, fetch it
-        
-        guard (UserDefaults.standard.value(forKey: "instagramAccessToken") != nil) else {
-            self.performSegue(withIdentifier: "loginIdentifier", sender: self)
-            return
-        }
-        
     }
 
     override func didReceiveMemoryWarning() {
