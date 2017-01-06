@@ -21,15 +21,17 @@ To avoid sharing creds within a public repository, they will be emailed to you s
 
 Instagram requires users to authenticate to receive an access token as explained [here](https://www.instagram.com/developer/authentication/). To help improve the first use experience of the app, if the correct creds are entered, the application will automatically login you in. Notes:
 
+- Application uses client-side Implicit OAuth
 - LoginViewController uses evaluateJavaScript function to pre-populate username & password fields, and then to simulate login click
 - **This would never be used in production code, but is demonstrated here to highlight how to interact with JS in a WKWebView**
 - The access token is retrieved and stored in UserDefaults. For production code, it would be much more preferable to store in Keychain
+- Provided login is for a sandbox account (which comes with rate limits that may be seen if the app used heavily)
 
 ### API Retrieval
 
 - Fetches recent images for the logged in user.
 - If using provided creds, there are 10 images saved already in Instagram on that particular user.
-- Application not tested with different login creds, but if there is recent activity for a different user, it is anticipated that the API should work in the same way
+- Application not tested with different login creds, but if there is recent activity for a different user, it is anticipated that the API should work in the same way. By default, we pull most recent 10 images, but this can be configured in fetchSelfRecentImages in [InstagramFetcher.swift](InstagramFetcher.swift)
 
 ### JSON Parsing
 
