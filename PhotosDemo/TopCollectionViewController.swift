@@ -39,7 +39,6 @@ class TopCollectionViewController: UICollectionViewController {
         
         // Fixed item size for speed of set-up. We could of course programmatically change/calculate cell size as well
         let spacing = (width - 300) / 3
-        print(spacing)
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         layout.itemSize = CGSize(width:150, height:75)
         layout.minimumInteritemSpacing = spacing
@@ -93,7 +92,6 @@ class TopCollectionViewController: UICollectionViewController {
         // #warning Incomplete implementation, return the number of items
         
         if let images = self.imageData {
-            print("Images.count = \(images.count)")
             return images.count
         }
         

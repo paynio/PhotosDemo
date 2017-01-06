@@ -14,8 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-                
+        
+        // Initial check that application has creds entered in Creds.plist
+        // If default ClientID cred is still in place ("XXXX"), the application will be terminated
+        
+        let credsFetcher = CredsFetcher()
+        
+        if credsFetcher.getCred(forInstaCred: .ClientID) == "XXXX" {
+            fatalError("ClientID must be set in Creds.plist")
+        }
         return true
     }
 
