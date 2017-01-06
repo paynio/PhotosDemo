@@ -13,6 +13,8 @@ import CoreImage
 class SingleImageViewController: UIViewController {
 
     @IBOutlet weak var filterNameLabel: UILabel!
+    @IBOutlet weak var previousButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
     
     var imageData:InstaImage?
     var filters:[CIFilter]?
@@ -44,7 +46,7 @@ class SingleImageViewController: UIViewController {
     
     func addExtraFilters() {
         
-        let filterNames = ["CIPhotoEffectFade", "CIPhotoEffectNoir",  "CIColorInvert", "CITwirlDistortion"]
+        let filterNames = ["CIPhotoEffectFade", "CIPhotoEffectNoir",  "CIColorInvert"]
         
         for name in filterNames {
             if let filter = CIFilter(name: name) {
@@ -87,9 +89,21 @@ class SingleImageViewController: UIViewController {
                 self.filterNameLabel.text = filter.name
                 
                 filter.setValue(self.originalImage, forKey: kCIInputImageKey)
-                DispatchQueue.main.async {
-                    self.topImageView.image = UIImage(ciImage:   filter.outputImage!)
-                }
+                
+                
+                    self.previousButton.isEnabled = false
+                    self.nextButton.isEnabled = false
+
+                    UIView.transition(with: self.topImageView,
+                                      duration: 0.5,
+                                      options: .transitionCrossDissolve,
+                                      animations: { self.topImageView.image = UIImage(ciImage:   filter.outputImage!) },
+                                      completion: { completed in
+                                        self.previousButton.isEnabled = true
+                                        self.nextButton.isEnabled = true
+                    })
+                    
+                    //self.topImageView.image = UIImage(ciImage:   filter.outputImage!)
                 
             }
         }

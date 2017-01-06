@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Top Collection View Controller-->
+        <!--PHOTO DEMO-->
         <scene sceneID="9Bj-GT-zeH">
             <objects>
                 <collectionViewController id="9oz-nb-TIk" customClass="TopCollectionViewController" customModule="PhotosDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -51,7 +51,7 @@
                             <outlet property="delegate" destination="9oz-nb-TIk" id="T30-cj-xta"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="XgL-WT-n85"/>
+                    <navigationItem key="navigationItem" title="PHOTO DEMO" id="XgL-WT-n85"/>
                     <connections>
                         <segue destination="GMs-HD-f0g" kind="presentation" identifier="loginIdentifier" id="R86-0V-Nbx"/>
                         <segue destination="a5k-Br-wds" kind="show" identifier="showImageIdentifier" id="5AE-cW-hBa"/>
@@ -135,6 +135,8 @@
                     </view>
                     <connections>
                         <outlet property="filterNameLabel" destination="H3o-i4-1py" id="S1u-M1-NI2"/>
+                        <outlet property="nextButton" destination="n1s-Wn-JPr" id="gpV-qr-izI"/>
+                        <outlet property="previousButton" destination="gFo-Xb-39h" id="apj-xF-b6E"/>
                         <outlet property="topImageView" destination="bQ3-EQ-Pz4" id="9qO-5i-clY"/>
                     </connections>
                 </viewController>
