@@ -21,18 +21,6 @@ class TopCollectionViewController: UICollectionViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Check for existence of access token. If not present, fetch it
-        
-        guard (UserDefaults.standard.value(forKey: "instagramAccessToken") != nil) else {
-            self.performSegue(withIdentifier: "loginIdentifier", sender: self)
-            return
-        }
         
         let fetcher = InstagramFetcher()
         fetcher.fetchSelfRecentImages() { imagesResponse in
@@ -45,7 +33,18 @@ class TopCollectionViewController: UICollectionViewController {
             self.collectionView?.reloadData()
         }
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Check for existence of access token. If not present, fetch it
+        
+        guard (UserDefaults.standard.value(forKey: "instagramAccessToken") != nil) else {
+            self.performSegue(withIdentifier: "loginIdentifier", sender: self)
+            return
+        }
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -75,8 +74,6 @@ class TopCollectionViewController: UICollectionViewController {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
-    
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items

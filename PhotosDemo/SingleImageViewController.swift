@@ -34,7 +34,6 @@ class SingleImageViewController: UIViewController {
         
         if let image = imageData, let imageURL = image.standardResolutionURLString {
             self.topImageView.af_setImage(withURL: URL(string: imageURL)!) { res in
-                print("done!")
                 
                 self.originalImage = CIImage(image: self.topImageView.image!)
                 self.filters = self.originalImage?.autoAdjustmentFilters()
