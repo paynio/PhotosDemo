@@ -9,7 +9,6 @@
 import UIKit
 
 fileprivate let reuseIdentifier = "InstaCell"
-fileprivate let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
 
 class TopCollectionViewController: UICollectionViewController {
 
@@ -84,12 +83,10 @@ class TopCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         
         if let images = self.imageData {
             return images.count

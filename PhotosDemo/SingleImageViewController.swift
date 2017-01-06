@@ -69,7 +69,6 @@ class SingleImageViewController: UIViewController, CAAnimationDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func previousButtonPressed(_ sender: Any) {
