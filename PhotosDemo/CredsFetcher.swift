@@ -8,6 +8,8 @@
 
 import Foundation
 
+let defaultCredValue = "XXXX"
+
 enum InstaCred: String {
     case ClientID = "InstagramClientID"
     case UserName = "InstagramUserName"

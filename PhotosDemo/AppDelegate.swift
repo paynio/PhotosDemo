@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let credsFetcher = CredsFetcher()
         
-        if credsFetcher.getCred(forInstaCred: .ClientID) == "XXXX" {
+        if credsFetcher.getCred(forInstaCred: .ClientID) == defaultCredValue {
             fatalError("ClientID must be set in Creds.plist")
         }
         return true

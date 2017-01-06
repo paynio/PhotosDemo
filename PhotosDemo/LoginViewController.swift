@@ -93,14 +93,23 @@ extension LoginViewController {
         let creds = CredsFetcher()
         
         guard let username = creds.getCred(forInstaCred: .UserName),
-            let password = creds.getCred(forInstaCred: .Password) else {
+            var password = creds.getCred(forInstaCred: .Password) else {
                 return
+        }
+        
+        if username == defaultCredValue {
+            return
+        }
+        if password == defaultCredValue {
+            password = ""
         }
         
         webView.evaluateJavaScript("document.getElementById('id_username').value= '\(username)'") { (res, error) in
             webView.evaluateJavaScript("document.getElementById('id_password').value= '\(password)'") { (res, error) in
-                webView.evaluateJavaScript("document.querySelector('input[type=submit]').click();") { (res, error) in
-                    
+                
+                if password != "" {
+                    webView.evaluateJavaScript("document.querySelector('input[type=submit]').click();") { (res, error) in
+                    }
                 }
             }
         }
