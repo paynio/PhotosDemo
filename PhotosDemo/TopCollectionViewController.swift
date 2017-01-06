@@ -95,11 +95,8 @@ class TopCollectionViewController: UICollectionViewController {
             return cell
         }
         
-        if let thumb = instaImage.thumbnailURLString {
-            cell.configureCell(with: thumb, placeholderImage: nil)
-        }
-        
-        cell.backgroundColor = UIColor.black
+        cell.configureCell(withInstaImage: instaImage)
+    
         return cell
     }
 

@@ -51,8 +51,11 @@ extension InstaImage {
         
         // Done separately as may not always contains text, so doesn't need a guard statement
         
-        if let text = json["text"] as? String {
-            self.descText = text
+        if let caption = json["caption"] as? [String:Any] {
+            if let text = caption["text"] as? String {
+                self.descText = text
+
+            }
         }
     }
 }

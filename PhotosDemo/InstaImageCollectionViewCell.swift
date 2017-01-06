@@ -15,10 +15,17 @@ class InstaImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var descTextLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     
-    func configureCell(with URLString: String, placeholderImage: UIImage?) {
+    func configureCell(withInstaImage insta: InstaImage) {
         
-        mainImageView.af_setImage(withURL:  URL(string: URLString)!)
-        self.backgroundColor = UIColor.lightGray
+        guard let thumb = insta.thumbnailURLString else {
+            return
+        }
+        
+        mainImageView.af_setImage(withURL:  URL(string: thumb)!)
+        
+        if let text = insta.descText {
+            self.descTextLabel.text = text
+        }
     }
     
     override func prepareForReuse() {
